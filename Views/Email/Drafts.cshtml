@@ -1,0 +1,26 @@
+﻿@model IEnumerable<YSent.Models.EmailModel>
+
+@{
+    ViewData["Title"] = "Draft Emails";
+}
+
+<h2>Draft Emails</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Subject</th>
+            <th>Recipients</th>
+            <th>Body</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var draft in Model)
+        {
+            <tr>
+                <td>@draft.Subject</td>
+                <td>@draft.RecipientEmails</td>
+                <td>@draft.Body</td>
+            </tr>
+        }
+    </tbody>
+</table>

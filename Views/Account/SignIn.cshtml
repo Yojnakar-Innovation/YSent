@@ -1,0 +1,121 @@
+﻿@model YSent.Models.UserEntry
+
+
+
+<style>
+    /* Center the form on the page */
+    .center-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh; /* Full viewport height */
+
+        font-family: 'Arial', sans-serif;
+    }
+
+    /* Style the form */
+    .signin-form {
+        width: 100%;
+        max-width: 400px; /* Limit the form width */
+        padding: 30px;
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px); /* Blur effect */
+        animation: fadeIn 0.5s ease-in-out; /* Apply the fadeIn animation */
+    }
+
+        /* Form title */
+        .signin-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 24px;
+        }
+
+    /* Style the form inputs */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+    .form-control {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .form-control:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 8px rgba(106, 17, 203, 0.3);
+            outline: none;
+        }
+
+    /* Style the button */
+    .btn-primary {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient button */
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            transform: translateY(-2px); /* Slight lift on hover */
+            box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+        }
+
+    /* Style the "Forgot password" link */
+    .forgot-password {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+        .forgot-password a {
+            color: #6a11cb;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+            .forgot-password a:hover {
+                color: #2575fc;
+                text-decoration: underline;
+            }
+
+</style>
+
+<div class="center-container">
+    <div class="signin-form">
+        <h2>Sign In</h2>
+        <form asp-action="SignIn" method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input name="username" class="form-control" placeholder="Enter your username" required />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input name="password" type="password" class="form-control" placeholder="Enter your password" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Log In</button>
+            <div class="forgot-password">
+                <span>Forgot <a href="ForgetPassword">password?</a></span>
+            </div>
+        </form>
+    </div>
+</div>

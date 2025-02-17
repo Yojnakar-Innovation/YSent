@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+@* h1>Welcome to the Simple Auth App</h1>
+
+@if (Context.Session.GetString("Username") != null)
+{
+    <p>You are signed in as <strong>@Context.Session.GetString("Username")</strong>.</p>
+}
+else
+{
+    <p>Please <a asp-controller="Account" asp-action="SignIn">sign in</a> to continue.</p>
+}
+ *@
+
+<partial name="_Body" />
+
+<partial name="_footer" />

@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Privacy";
+}
+
+
+<section id="service-details" class="service-details section">
+    <div class="container">
+        <div class="row gy-4">
+            <div class="col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                <div class="sidebar">
+                    <div class="sidebar-header">
+                        <h4>Menu</h4>
+                    </div>
+                    <div class="services-list">
+                        <a class="nav-link text-bg-dark" asp-area="" asp-controller="NewMarathone" asp-action="AllMarathones">All Marathones</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="NewMarathone" asp-action="Index">New Marathon</a>
+                        <a href="abc" data-action="List0">List</a>
+                        <a href="abc" data-action="List">All Templates</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="List">Mail Keepers</a>
+                        <a href="BlackList" data-action="BlackList">Black List </a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="NewMarathone" asp-action="Reports">Results</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9" data-aos="fade-up" data-aos-delay="200">
+                <div class="main-content">
+                    <div class="content-header">
+                        <input type="text" class="search-bar" placeholder="Search...">
+                       
+                    </div>
+                    <div id="dynamicContent">
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

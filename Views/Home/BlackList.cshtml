@@ -1,0 +1,103 @@
+﻿@* Black List.cshtml *@
+
+
+
+
+<!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome for Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<!-- Custom CSS for additional styling -->
+
+<style>
+    .navbar {
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    }
+
+    .navbar-brand {
+        /* Make the brand name stand out */
+        font-size: 1.2rem;
+    }
+
+    .nav-link {
+        font-size: 1.1rem;
+        margin: 0 10px; /* Add spacing between links */
+        transition: color 0.3s ease; /* Smooth hover effect */
+    }
+
+        .nav-link:hover {
+            color: #007bff !important; /* Change color on hover */
+        }
+
+    .navbar-toggler {
+        border: none;
+    }
+
+        .navbar-toggler:focus {
+            outline: none;
+        }
+</style>
+
+
+
+
+<!-- Professional Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <!-- Brand Logo -->
+        <a class="navbar-brand" href="#">
+            Black List
+        </a>
+
+        <!-- Toggle Button for Mobile -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <!-- Align links to the right -->
+                <li class="nav-item">
+                    <a class="nav-link " asp-area="" asp-controller="Email" asp-action="MailBox">All Mails</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Email" asp-action="Send">Start New Service</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="abc">All Templates</a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="List" asp-action="Index">EMail List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " asp-area="" asp-controller="Home" asp-action="BlackList">Black List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " asp-area="" asp-controller="Email" asp-action="Sent">Results</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+
+<div class="container-fluid">
+  
+    <div class="span10">
+        <h2>Black List Subscribers (future update - work in progress)</h2><br>
+        <div style="clear:both;">
+            <h3>Black Bucket List</h3>
+            <p>To ensure certain email addresses do not receive your marketing emails or automated replies, import them into this Black Bucket List. Any email addresses you later add through CSV or API to any of this brand's lists will be ignored if they are included in the Black Bucket List.</p>
+            <hr>
+            <footer>
+                <p class="footer-left">© 2024 <a href="MailBox" title="" target="_blank" data-original-title="">Ysent</a></p>
+            </footer>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,266 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Marathon</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Trumbowyg CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.27.3/ui/trumbowyg.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .nav-link {
+            font-size: 1rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+            .nav-link:hover {
+                color: #007bff !important;
+            }
+
+        .container-fluid {
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            border-radius: 4px;
+            padding: 10px;
+            font-size: 1rem;
+        }
+
+        .btn {
+            font-size: 1rem;
+            padding: 10px 20px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+        }
+
+            .btn-secondary:hover {
+                background-color: #5a6268;
+            }
+
+        .trumbowyg-box {
+            margin-top: 0;
+            margin-bottom: 20px;
+            min-height: 300px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .trumbowyg-editor {
+            min-height: 250px;
+            background: #fff;
+            font-size: 1rem;
+        }
+
+        .pdf-container {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+        }
+
+        .alert {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        .preview {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">New Marathon</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="_MarathonPartial" data-action="Marathon" class="nav-link active">Marathons</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="NewMarathone" asp-action="Index">New Marathon</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Templates
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a href="abc" data-action="List0" class="dropdown-item">Create Template</a>
+                            <a href="abc" data-action="List" class="dropdown-item">All Templates</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="List">Mail List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="_BlackListPartial" data-action="BlackList" class="nav-link">Black List Prison</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="_ReportPartial" data-action="Report" class="nav-link">Results</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Left Column: Form -->
+            <div class="col-md-3">
+                <h2>New Marathon</h2>
+                <div class="form-group">
+                    <label for="campaign_title">Title</label>
+                    <input type="text" class="form-control" id="campaign_title" name="campaign_title" placeholder="Title of this Marathon">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject of this email">
+                </div>
+                <div class="form-group">
+                    <label for="from_name">From Name</label>
+                    <input type="text" class="form-control" id="from_name" name="from_name" placeholder="From name" value="project_name">
+                </div>
+                <div class="form-group">
+                    <label for="from_email">From Email</label>
+                    <input type="text" class="form-control" id="from_email" name="from_email" placeholder="name@domain.com" value="hello@Ysent.com">
+                </div>
+                <div class="form-group">
+                    <label for="reply_to">Reply To Email</label>
+                    <input type="text" class="form-control" id="reply_to" name="reply_to" placeholder="name@domain.com" value="support@Ysent.com">
+                </div>
+                <div class="form-group">
+                    <label for="plain">Plain Text Version</label>
+                    <textarea class="form-control" id="plain" name="plain" rows="5" placeholder="Plain text version of this email"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="attachments">Attachments</label>
+                    <input type="file" class="form-control-file" id="attachments" name="attachments[]" multiple>
+                    <small class="form-text text-muted">Allowed file types: jpeg, jpg, gif, png, pdf, zip</small>
+                </div>
+                <button id="campaign-save-only-btn" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-secondary">Save & Next</button>
+                <div class="form-check mt-3">
+                    <input type="checkbox" class="form-check-input" id="save_as_template" name="save_as_template">
+                    <label class="form-check-label" for="save_as_template">Also save as template?</label>
+                </div>
+            </div>
+
+            <!-- Right Column: Editor -->
+            <div class="col-md-9">
+                <h2>Ysent Editor</h2>
+                <div id="my-editor"></div>
+                <button id="save-btn" class="btn btn-primary mt-3">Save Template</button>
+                <button id="insert-pdf-btn" class="btn btn-secondary mt-3">Attach PDF</button>
+                <div id="output" class="mt-3"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.27.3/trumbowyg.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom Script -->
+    <script>
+        $(document).ready(function () {
+            // Initialize Trumbowyg Editor
+            $('#my-editor').trumbowyg({
+                btns: [
+                    ['viewHTML'],
+                    ['undo', 'redo'],
+                    ['formatting'],
+                    ['strong', 'em', 'del'],
+                    ['superscript', 'subscript'],
+                    ['link'],
+                    ['insertImage'],
+                    ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                    ['unorderedList', 'orderedList'],
+                    ['horizontalRule'],
+                    ['removeformat'],
+                    ['fullscreen'],
+                    ['foreColor', 'backColor'],
+                    ['table']
+                ],
+                autogrow: true,
+                imageWidthModalEdit: true,
+                removeformatPasted: true
+            });
+
+            // Save Button Handler
+            $('#save-btn').click(function () {
+                var content = $('#my-editor').trumbowyg('html');
+                $('#output').html('<div class="alert alert-success">Content saved!</div>');
+                $('#output').append('<div class="preview">' + content + '</div>');
+            });
+
+            // PDF Button Handler
+            $('#insert-pdf-btn').click(function () {
+                var pdfLink = prompt("Enter the PDF URL:");
+                if (pdfLink) {
+                    var pdfEmbed = '<div class="pdf-container">' +
+                        '<a href="' + pdfLink + '" target="_blank" class="btn btn-primary">' +
+                        '<i class="fas fa-file-pdf"></i> View PDF</a></div>';
+                    $('#my-editor').trumbowyg('execCmd', {
+                        cmd: 'insertHTML',
+                        param: pdfEmbed,
+                        forceCss: false
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

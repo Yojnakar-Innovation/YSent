@@ -1,0 +1,150 @@
+﻿
+@using YSent.Models
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] Ysent</title>
+
+    <!-- Favicons -->
+    <link href="~/assets/img/favicon.png" rel="icon">
+    
+   
+    <!-- Preload Fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    </noscript>
+
+    <!-- Vendor CSS Files -->
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/assets/vendor/aos/aos.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" asp-append-version="true" />
+
+    <!-- quill Editor -->
+    <environment include="Development">
+        <link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.snow.css" />
+        <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+   </environment>
+  
+
+    <!-- Main CSS File -->
+    <link href="~/assets/css/main.css" rel="stylesheet" asp-append-version="true">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS for additional styling -->
+    <style>
+        .navbar {
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+        }
+
+        .navbar-brand {
+            /* Make the brand name stand out */
+            font-size: 1.2rem;
+        }
+
+        .nav-link {
+            font-size: 1.1rem;
+            margin: 0 10px; /* Add spacing between links */
+            transition: color 0.3s ease; /* Smooth hover effect */
+        }
+
+            .nav-link:hover {
+                color: #007bff !important; /* Change color on hover */
+            }
+
+        .navbar-toggler {
+            border: none; /* Remove default border */
+        }
+
+            .navbar-toggler:focus {
+                outline: none; /* Remove outline on focus */
+            }
+    </style>
+   
+
+</head>
+<body class="index-page">
+    <div id="preloader"></div>
+
+    <!-- Header -->
+    <header id="header" class="header d-flex align-items-center sticky-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+            <a href="/" class="logo d-flex align-items-center me-auto" aria-label="Home">
+                <h1 class="sitename" style="font-size: 40px"><b>Ysent</b></h1>
+            </a>
+
+            @if (Context.Session.GetString("username") != null)
+            {
+
+                <div class="dropdown">
+                    <a class="btn-getstarted" asp-area="" asp-controller="Account" asp-action="Setting">@Context.Session.GetString("username")</a>
+                    <a class="btn-getstarted" asp-controller="Account" asp-action="SignOut">Log Out</a>
+                </div>
+
+            }
+            else
+            {
+                <nav id="navmenu" class="navmenu">
+                    <ul>
+                        <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#footer">Contact</a></li>
+                    </ul>
+                    <i class="mobile-nav-toggle d-xl-none bi bi-list" aria-label="Toggle Navigation"></i>
+                </nav>
+
+                <a class="btn-getstarted" asp-area="" asp-controller="Account" asp-action="SignIn">Sign In</a>
+                <a class="btn-getstarted" asp-area="" asp-controller="Account" asp-action="SignUp">Sign Up</a>
+            }
+        </div>
+    </header>
+
+
+    <!-- Main Content -->
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
+    <!-- Scroll Top Button -->
+    <a href="#" class="scroll-top d-flex align-items-center justify-content-center" aria-label="Scroll to Top">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
+
+    <!-- Bootstrap JS and Dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <!-- Vendor JS Files -->
+    <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+    <script src="~/assets/vendor/aos/aos.js" defer></script>
+    <script src="~/assets/vendor/glightbox/js/glightbox.min.js" defer></script>
+    <script src="~/assets/vendor/swiper/swiper-bundle.min.js" defer></script>
+    <script src="~/assets/vendor/isotope-layout/isotope.pkgd.min.js" defer></script>
+
+    
+
+    <!-- Main JS File -->
+    <script src="~/assets/js/main.js" asp-append-version="true" defer></script>
+
+    <!-- Render Section for Additional Scripts -->
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

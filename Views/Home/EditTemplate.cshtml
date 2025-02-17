@@ -1,0 +1,188 @@
+﻿@model YSent.Models.Template
+
+<!-- Include necessary CSS and JS files -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
+
+<style>
+    .navbar {
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    }
+
+    .navbar-brand {
+        /* Make the brand name stand out */
+        font-size: 1.2rem;
+    }
+
+    .nav-link {
+        font-size: 1.1rem;
+        margin: 0 10px; /* Add spacing between links */
+        transition: color 0.3s ease; /* Smooth hover effect */
+    }
+
+        .nav-link:hover {
+            color: #007bff !important; /* Change color on hover */
+        }
+
+    .navbar-toggler {
+        border: none;
+    }
+
+        .navbar-toggler:focus {
+            outline: none;
+        }
+</style>
+
+
+
+
+<!-- Professional Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <!-- Brand Logo -->
+        <a class="navbar-brand" href="#">
+            Edit Template
+        </a>
+
+        <!-- Toggle Button for Mobile -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <!-- Align links to the right -->
+                <li class="nav-item">
+                    <a class="nav-link " asp-area="" asp-controller="Email" asp-action="MailBox">All Mails</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Email" asp-action="Send">Start New Service</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="abc">All Templates</a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="List" asp-action="Index">EMail List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " asp-area="" asp-controller="Home" asp-action="BlackList">Black List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " asp-area="" asp-controller="Email" asp-action="Sent">Results</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <h2>Edit Template</h2>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+
+    <form asp-action="EditTemplate" method="post" id="edit-template-form">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" name="ImageUrl" id="image-url" asp-for="ImageUrl" />
+
+        <div class="mb-3">
+            <label asp-for="TemplateName" class="form-label">Template Name</label>
+            <input asp-for="TemplateName" class="form-control" required />
+            <span asp-validation-for="TemplateName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="PlainText" class="form-label">Plain Text Version</label>
+            <textarea asp-for="PlainText" class="form-control" rows="4" required></textarea>
+            <span asp-validation-for="PlainText" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label for="quill-editor" class="form-label">HTML Content</label>
+            <div id="quill-editor" style="height: 400px;"></div>
+            <input type="hidden" name="HtmlContent" id="html-content" asp-for="HtmlContent">
+            <span asp-validation-for="HtmlContent" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="@Url.Action("abc")" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Initialize Quill with image upload functionality
+            var quill = new Quill('#quill-editor', {
+                theme: 'snow',
+                modules: {
+                    toolbar: [
+                        ['bold', 'italic', 'underline', 'strike'],
+                        ['blockquote', 'code-block'],
+                        ['link', 'image'],
+                        [{ 'header': 1 }, { 'header': 2 }],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                        [{ 'indent': '-1' }, { 'indent': '+1' }],
+                        [{ 'align': [] }],
+                        ['clean']
+                    ]
+                }
+            });
+
+            // Handle image insertion
+            const toolbar = quill.getModule('toolbar');
+            toolbar.addHandler('image', function () {
+                const fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.accept = 'image/*';
+
+                fileInput.addEventListener('change', function (e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const formData = new FormData();
+                        formData.append('file', file);
+
+                        fetch('/Home/UploadImage', {
+                            method: 'POST',
+                            body: formData
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.url) {
+                                    // Embed image directly into the editor
+                                    quill.insertEmbed(quill.getSelection().index, 'image', data.url);
+                                    $('#image-url').val(data.url); // Update hidden ImageUrl field
+                                } else if (data.error) {
+                                    alert(data.error);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                alert('Image upload failed.');
+                            });
+                    }
+                });
+
+                fileInput.click();
+            });
+
+            // Load existing content into the editor
+            if ($('#html-content').val()) {
+                quill.root.innerHTML = $('#html-content').val();
+            }
+
+            // Form submission handler
+            $('#edit-template-form').on('submit', function (e) {
+                e.preventDefault();
+                $('#html-content').val(quill.root.innerHTML);
+                this.submit();
+            });
+        });
+    </script>
+}

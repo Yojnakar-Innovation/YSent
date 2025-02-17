@@ -1,0 +1,200 @@
+﻿@model YSent.Models.ListModel
+
+
+@{
+    ViewData["Title"] = "Create List Of Subscribers";
+}
+
+
+
+<!-- Custom CSS -->
+<style>
+    /* Custom button styles */
+    .btn-custom {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 13px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-custom:hover {
+            background-color: #45a049; /* Darker green */
+        }
+
+    .btn-custom-danger {
+        background-color: #f44336; /* Red */
+    }
+
+        .btn-custom-danger:hover {
+            background-color: #d32f2f; /* Darker red */
+        }
+
+    .btn-custom-warning {
+        background-color: #ff9800; /* Orange */
+    }
+
+        .btn-custom-warning:hover {
+            background-color: #e68a00; /* Darker orange */
+        }
+
+    .btn-custom-info {
+        background-color: #2196F3; /* Blue */
+    }
+
+        .btn-custom-info:hover {
+            background-color: #1976D2; 
+        }
+
+    /* Center the buttons */
+    .button-container {
+        display: flex;
+        justify-content: center; /* Horizontally center */
+        align-items: center; /* Vertically center (if needed) */
+        margin-bottom: 20px; /* Add some space below the buttons */
+    }
+
+        .button-container button {
+            margin: 0 10px; /* Add some space between buttons */
+        }
+
+</style>
+
+
+
+
+
+<br />
+<!-- Buttons with custom styling -->
+
+<br />
+<div class="button-container">
+    <button class="btn btn-custom" onclick="window.location.href='@Url.Action("Create", "List")'">
+        <i class="fa fa-plus"></i> Add Subscribers
+    </button>
+    <button class="btn btn-custom-danger" onclick="window.location.href='@Url.Action("Index", "List")'">
+        <i class="fa fa-minus"></i> Delete Subscribers
+    </button>
+
+    <button class="btn btn-custom-info" onclick="window.location.href='@Url.Action("ExportList", "List")'">
+        <i class="fa fa-download"></i> Export All Subscribers
+    </button>
+</div>
+
+
+
+<div class="container">
+    <div class="card animate-fade">
+        <div class="card-header bg-primary text-white text-center">
+            <h3 class="mb-0">Create a New Subscriber List</h3>
+        </div>
+        <div class="card-body">
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-success animate-slide">@TempData["Message"]</div>
+            }
+
+            <form asp-action="Create" method="post">
+
+                <div class="mb-3 animate-input">
+                    <label asp-for="ListName" class="form-label"></label>
+                    <input asp-for="ListName" class="form-control" placeholder="Enter List Name" />
+                    <span asp-validation-for="ListName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 animate-input">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+              
+                <div class="mb-3 animate-input">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-control" placeholder="Enter Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100 animate-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Reduced width for a compact form */
+.container {
+    max-width: 450px;
+    margin: 50px auto;
+}
+
+/* Card styling */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Input field animations */
+.animate-input input {
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    transition: border-color 0.3s ease, transform 0.2s ease;
+}
+
+.animate-input input:focus {
+    border-color: #007bff;
+    transform: scale(1.03);
+    outline: none;
+}
+
+/* Button animations */
+.animate-btn {
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 18px;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.animate-btn:hover {
+    transform: scale(1.05);
+    background-color: #28a745 !important;
+}
+
+
+
+.animate-fade {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Slide animation for alerts */
+.keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-slide {
+    animation: slideIn 0.5s ease-in-out;
+}
+</style>

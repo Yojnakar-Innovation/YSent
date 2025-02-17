@@ -1,0 +1,246 @@
+﻿@*
+   all subscribers
+*@
+@{
+}
+<title>Subscriber Lists</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome for Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<!-- Custom CSS -->
+<style>
+
+    .table-responsive {
+        margin-top: 20px;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;
+        border-radius: 5px;
+    }
+
+    .modal-header {
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+    }
+
+    .modal-footer {
+        border-top: 1px solid #ddd;
+        padding-top: 10px;
+    }
+</style>
+<!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome for Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<!-- Custom CSS for additional styling -->
+<style>
+    .navbar {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    }
+
+    .navbar-brand {
+        /* Make the brand name stand out */
+        font-size: 1.2rem;
+    }
+
+    .nav-link {
+        font-size: 1.1rem;
+        margin: 0 10px; /* Add spacing between links */
+        transition: color 0.3s ease; /* Smooth hover effect */
+    }
+
+        .nav-link:hover {
+            color: #007bff !important; /* Change color on hover */
+        }
+
+    .navbar-toggler {
+        border: none; /* Remove default border */
+    }
+
+        .navbar-toggler:focus {
+            outline: none; /* Remove outline on focus */
+        }
+</style>
+
+ <!-- Professional Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <!-- Brand Logo -->
+            <a class="navbar-brand" href="#">
+                 Mail List
+            </a>
+
+            <!-- Toggle Button for Mobile -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <!-- Align links to the right -->
+                    <li class="nav-item">
+                        <a href="_MarathonPartial" data-action="Marathon" class="nav-link active">Marathons</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="NewMarathone" asp-action="Index">New Marathon</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Templates
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a href="abc" data-action="List0" class="dropdown-item">List</a>
+                            <a href="abc" data-action="List" class="dropdown-item">All Templates</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="List">Mail Keepers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="_BlackListPartial" data-action="BlackList" class="nav-link">Black List Prison</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="_ReportPartial" data-action="Report" class="nav-link">Results</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+   
+       
+            <!-- Main Content -->
+            <div class="col-md-10">
+                
+              
+                <br />
+
+                <!-- Add New List Button and Search Form -->
+                <div style="clear:both;">
+                    <button class="btn btn-primary" id="new-list-btn"><i class="fas fa-plus-circle"></i> Add a new list</button>
+                    <form class="form-inline float-right" action="#" method="GET">
+                        <input type="text" class="form-control mr-2" name="s" placeholder="Search all lists">
+                        <button type="submit" class="btn btn-secondary"><i class="fas fa-search"></i> Search</button>
+                    </form>
+                </div>
+
+                <!-- Add List Form -->
+                <form action="#" method="POST" class="form-vertical well mt-3" id="list-form" style="display: none;">
+                    <label class="control-label" for="list_name">List name</label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="list_name" name="list_name" placeholder="The name of your new list">
+                    </div>
+                    <button type="submit" class="btn btn-dark"><i class="fas fa-plus"></i> Add</button>
+                  <div style="clear:both; margin-bottom: 13px;">
+                 <a href="EditList" class="btn btn-primary" id="new-list-btn">
+                  <i class="fas fa-plus-circle"></i> Create New Mail list
+                 </a>
+                   </div>
+                    <a href="javascript:void(0)" id="close-add-list-btn" class="btn btn-link"><i class="fas fa-times"></i> Cancel</a>
+                </form>
+   
+                <!-- Subscriber Lists Table -->
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>List</th>
+                                <th>Unsubscribed</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Example Row -->
+                            <tr id="5">
+                                <td><span class="badge bg-secondary" id="list5">Ykx4P..</span></td>
+                                <td><a href="#" title="">Trial Users</a></td>
+                                <td><a href="javascript:void(0)" title="Hide this list"><i class="fas fa-eye-slash"></i></a></td>
+                                <td><a href="#" title="List settings"><i class="fas fa-pencil-alt"></i></a></td>
+                                <td><a href="#delete-list" title="Delete Trial Users" data-bs-toggle="modal"><i class="fas fa-trash"></i></a></td>
+                            </tr>
+                            <!-- Add more rows as needed -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Delete List Modal -->
+                <div id="delete-list" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Delete list</h3>
+                            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <p>All subscribers, custom fields, autoresponders, and segments in this list will be permanently deleted. Confirm delete <span id="list-to-delete" style="font-weight:bold;"></span>?</p>
+                            <input type="text" class="form-control" id="delete-text" placeholder="Type the word DELETE">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" id="delete-list-btn" class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+ 
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Custom Script -->
+    <script>
+        $(document).ready(function () {
+            // Show/Hide Add List Form
+            $("#new-list-btn").click(function () {
+                $("#list-form").slideDown("fast");
+                $("#list_name").focus();
+            });
+            $("#close-add-list-btn").click(function () {
+                $("#list-form").slideUp("fast");
+            });
+
+            // Delete List Modal
+            $("a[href='#delete-list']").click(function () {
+                const listName = $(this).attr("title").replace("Delete ", "");
+                $("#list-to-delete").text(listName);
+                $("#delete-list").show();
+            });
+
+            // Delete List Button
+            $("#delete-list-btn").click(function () {
+                if ($("#delete-text").val() === "DELETE") {
+                    alert("List deleted successfully!");
+                    $("#delete-list").hide();
+                } else {
+                    alert("Please type the word DELETE to confirm.");
+                }
+            });
+
+            // Close Modal
+            $(".close").click(function () {
+                $("#delete-list").hide();
+            });
+        });
+    </script>
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+

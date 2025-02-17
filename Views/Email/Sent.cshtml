@@ -1,0 +1,165 @@
+﻿@model IEnumerable<YSent.Models.EmailModel>
+
+@{
+    ViewData["Title"] = "Sent Emails";
+}
+
+<!-- Bootstrap Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <!-- Brand/Logo -->
+        <a class="navbar-brand" href="#">
+            Ysent Reports
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Top Navbar Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <!-- Right-aligned links -->
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Email" asp-action="MailBox">All Mails</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Email" asp-action="Send">Start New Service</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="abc">All Templates</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="List" asp-action="Index">EMail List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="BlackList">Black List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Email" asp-action="Sent">Results</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-2 col-md-3 col-sm-12 sidebar p-3">
+            <h5 class="text-dark">Menu</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Email" asp-action="MailBox">All Mails</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Email" asp-action="Send">New Mail Service</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Abc">All Templates</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="List" asp-action="Index">EMail List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="BlackList">Black List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" asp-area="" asp-controller="Email" asp-action="Sent">Results</a>
+                </li>
+            </ul>
+        </div>
+        <p>Future Updates, Bouncing Mail Update, spam Update,  data visulization</p>
+        <!-- Main Content -->
+        <div class="col-lg-10 col-md-9 col-sm-12">
+            <div class="table-responsive p-3">
+                <table class="table table-hover table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Subject</th>
+                            <th>Recipients</th>
+                            <th>Sent Time</th>
+                            <th>Opened</th>
+                            <th>Open Date</th>
+                            <th>Location</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Subject</td>
+                                <td>@item.RecipientEmails</td>
+                                <td>@item.SentTime</td>
+                                <td>@item.opened</td>
+                                <td>@(item.OpenDate.HasValue 
+                                    ? item.OpenDate.Value.ToString("dd-MM-yyyy HH:mm:ss") 
+                                    : "N/A")</td>
+                                <td>@item.IPAddress</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Styles -->
+<style>
+    /* Navbar */
+    .navbar {
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    }
+    .navbar-brand {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+    .nav-link {
+        font-size: 1rem;
+        margin: 0 10px;
+        transition: color 0.3s ease;
+    }
+    .nav-link:hover {
+        color: #007bff !important;
+    }
+    .navbar-toggler {
+        border: none;
+    }
+    .navbar-toggler:focus {
+        outline: none;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        background-color: #f8f9fa;
+        border-right: 1px solid #ddd;
+    }
+    .sidebar h5 {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    .sidebar .nav-link {
+        color: #333;
+        padding-left: 0;
+    }
+    .sidebar .nav-link:hover {
+        color: #007bff;
+    }
+    .sidebar .nav-link.active {
+        font-weight: 600;
+        color: #0056b3;
+    }
+
+    /* Table styling */
+    th, td {
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+
+ 
+  
+</style>
