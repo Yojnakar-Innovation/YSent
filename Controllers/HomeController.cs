@@ -37,6 +37,7 @@ namespace YSent.Controllers
 
         public IActionResult Privacy()
         {
+            manageUserAccess();
             return View();
         }
 
