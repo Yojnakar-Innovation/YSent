@@ -22,6 +22,14 @@ namespace YSent.Controllers
             _env = env;
         }
 
+        public void manageUserAccess()
+        {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                Response.Redirect("/Home/Index");
+            }
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -35,6 +43,7 @@ namespace YSent.Controllers
         
         public IActionResult List()
         {
+            manageUserAccess();
             return View();
         }
 
@@ -42,6 +51,7 @@ namespace YSent.Controllers
 
         public IActionResult AddList()
         {
+            manageUserAccess();
             return View();
         }
 
@@ -49,11 +59,13 @@ namespace YSent.Controllers
 
 		public IActionResult BlackList()
         {
+            manageUserAccess();
             return View();
         }
 
         public IActionResult EditList()
         {
+            manageUserAccess();
             return View();
         }
 
@@ -62,6 +74,7 @@ namespace YSent.Controllers
         // GET: Home/NewTemplate
         public IActionResult NewTemplate()
         {
+            manageUserAccess();
             return View();
         }
 
@@ -69,6 +82,7 @@ namespace YSent.Controllers
         [HttpPost]
         public IActionResult NewTemplate(Template template)
         {
+            manageUserAccess();
             if (ModelState.IsValid)
             {
                 try
@@ -180,6 +194,7 @@ namespace YSent.Controllers
 
         public IActionResult abc()
         {
+            manageUserAccess();
             var templates = new List<Template>();
 
             try
@@ -230,6 +245,7 @@ namespace YSent.Controllers
         [HttpGet] // Explicitly specify the HTTP method
         public IActionResult EditTemplate(int id)
         {
+            manageUserAccess();
             try
             {
                 using (var connection = _dbHelper.GetConnection())

@@ -17,6 +17,15 @@ public class AccountController : Controller
         _configuration = configuration;
     }
 
+    public void manageUserAccess()
+    {
+        if (HttpContext.Session.GetString("username") == null)
+        {
+            Response.Redirect("/Home/Index");
+        }
+    }
+
+
     [HttpPost]
     public IActionResult ForgetPassword(PasswordReset model)
     {
@@ -326,6 +335,7 @@ public class AccountController : Controller
         // GET: /Account/Admin/ViewAllUsers
         public IActionResult ViewAllUsers()
         {
+            
             if (!IsAdmin())
             {
                 return RedirectToAction("Privacy", "Home"); // Redirect non-admin users
@@ -362,6 +372,7 @@ public class AccountController : Controller
         [HttpPost]
         public IActionResult DeleteUser(string username)
         {
+            manageUserAccess();
             if (!IsAdmin())
             {
                 return RedirectToAction("Index", "Home"); // Redirect non-admin users
@@ -385,6 +396,7 @@ public class AccountController : Controller
         // Helper method to check if the current user is an admin
         private bool IsAdmin()
         {
+           
             var isAdmin = HttpContext.Session.GetString("is_admin");
             return isAdmin != null && (isAdmin.Equals("1") || isAdmin.Equals("True", StringComparison.OrdinalIgnoreCase));
         }

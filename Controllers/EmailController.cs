@@ -19,9 +19,22 @@ namespace YSent.Controllers
             _configuration = configuration;
         }
 
+
+        public void manageUserAccess()
+        {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                Response.Redirect("/Home/Index");
+            }
+        }
+
+
+
         // GET: Email/Send
         public IActionResult Send()
         {
+
+            manageUserAccess();
             var model = new EmailModel
             {
                 // Initialize lists so the view can bind them
@@ -208,12 +221,14 @@ namespace YSent.Controllers
 
         public IActionResult Drafts()
         {
+            manageUserAccess();
             var drafts = GetDraftEmails();
             return View(drafts);
         }
 
         public IActionResult Sent()
-        {
+        {   
+            manageUserAccess();
             var sentEmails = GetSentEmails();
             return View(sentEmails);
         }
@@ -326,6 +341,7 @@ namespace YSent.Controllers
         // MailBox action to list both sent and draft emails.
         public IActionResult MailBox()
         {
+            manageUserAccess();
             var mails = new List<MailViewModel>();
 
             // Retrieve sent emails.

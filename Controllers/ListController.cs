@@ -14,9 +14,24 @@ namespace YSent.Controllers
         {
             _configuration = configuration;
         }
+
+
+        public void manageUserAccess()
+        {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                Response.Redirect("/Home/Index");
+            }
+        }
+
+
+
         // Show all records
         public IActionResult Index()
         {
+
+            manageUserAccess();
+
             List<ListModel> records = new List<ListModel>();
             string connectionString = _configuration.GetConnectionString("DefaultConnection");
 
@@ -73,6 +88,7 @@ namespace YSent.Controllers
 
         public IActionResult Create()
         {
+            manageUserAccess();
             return View();
         }
 
@@ -81,6 +97,8 @@ namespace YSent.Controllers
         [HttpPost]
         public IActionResult Create(ListModel model)
         {
+            manageUserAccess();
+
             if (ModelState.IsValid)
             {
                 // ✅ Retrieve connection string correctly
@@ -114,6 +132,7 @@ namespace YSent.Controllers
 
         public IActionResult ExportList()
         {
+            manageUserAccess();
             List<ListModel> records = new List<ListModel>();
             string connectionString = _configuration.GetConnectionString("DefaultConnection");
 
